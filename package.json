@@ -1,5 +1,5 @@
 {
-  "name": "jsontable",
+  "name": "getjsontable",
   "version": "1.0.0",
   "description": "JS library which helps to get some site table converted to json",
   "main": "build/main/index.js",
