@@ -1,3 +1,3 @@
-export * from './lib/async';
-export * from './lib/hash';
-export * from './lib/number';
+import table from './lib/table';
+
+export default table;
