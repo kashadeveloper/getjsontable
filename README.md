@@ -19,7 +19,7 @@ yarn add getjsontable
 ## Code example
 ```javascript
 import table from "getjsontable";
-table(`https://sa-mp.ru/adminhistory-aurum`)
+table(`https://sa-mp.ru/adminhistory-aurum`, "post")
   .then((res) => console.log(res[1][1]))
   .catch((err) => console.log(`err: ${err}`));
 ```
