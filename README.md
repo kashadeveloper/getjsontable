@@ -37,7 +37,7 @@ table("https://sa-mp.ru/adminhistory-aurum", "post", undefined, {
 ## ``IOptions`` type
 | Option | Explanation |
 | ---- | ----|
-| ``hidehideColumnsDescription`` (boolean) | Hide the columns explanation
+| ``hideColumnsDescription`` (boolean) | Hide the columns explanation
 
 # Result
 ```
