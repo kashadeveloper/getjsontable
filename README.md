@@ -17,6 +17,7 @@ yarn add getjsontable
 ```
 
 ## Code example
+
 ```javascript
 import table from "getjsontable";
 table("https://sa-mp.ru/adminhistory-aurum", "post", undefined, {
@@ -27,6 +28,21 @@ table("https://sa-mp.ru/adminhistory-aurum", "post", undefined, {
     console.log(err);
     console.log(`this is an error`);
   });
+```
+
+#### If you're using CommonJS
+But it will be better if you will use ES modules
+```javascript
+const table = require("getjsontable").default;
+table("https://sa-mp.ru/adminhistory-aurum", "post", undefined, {
+  hideColumnsDescription: true,
+})
+  .then((res) => console.log(res[0]))
+  .catch((err) => {
+    console.log(err);
+    console.log(`this is an error`);
+  });
+
 ```
 | Option  |  Type |
 |---|---|
