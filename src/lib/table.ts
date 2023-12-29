@@ -1,59 +1,40 @@
-import axios from 'axios';
-import { Tabletojson } from 'tabletojson';
+import axios, { AxiosRequestConfig } from 'axios';
+import { tabletojson } from 'tabletojson';
+
 import XRay from 'x-ray';
+import { IOptions } from './types/IOptions';
 
 const xray = XRay();
 
+function formattedData(result: any, options?: IOptions) {
+  if (options?.hideColumnsDescription) result.splice(0, 1);
+  return result;
+}
+
 async function table(
   url: string,
-  method: 'post' | 'get',
-  options?: any
+  method: AxiosRequestConfig<any>['method'],
+  axiosOptions?: AxiosRequestConfig<any>,
+  options?: IOptions
 ): Promise<Record<string, any>> {
   return new Promise((resolve, reject) => {
-    if (method == 'get')
-      axios
-        .get(url, options)
-        .then((response) => {
-          if (response.status >= 400)
-            return reject(
-              new Error(`Site was returned ${response.status} code`)
-            );
-          xray(response.data, ['table@html'])((error, data) => {
-            if (error) {
-              return reject(error);
-            }
-            resolve(
-              data.map(
-                (x: string) => Tabletojson.convert(`<table>${x}</table>`)[0]
-              )[0]
-            );
-          });
-        })
-        .catch((err) => {
-          return reject(err);
+    axios({ url, method, ...axiosOptions })
+      .then((response) => {
+        xray(response.data, ['table@html'])((error, data) => {
+          if (error) {
+            return reject(error);
+          }
+
+          const result = data.map(
+            (x: string) => tabletojson.convert(`<table>${x}</table>`)[0]
+          )[0];
+
+          resolve(formattedData(result, options));
         });
-    else
-      axios
-        .post(url, options)
-        .then((response) => {
-          if (response.status >= 400)
-            return reject(
-              new Error(`Site was returned ${response.status} code`)
-            );
-          xray(response.data, ['table@html'])((error, data) => {
-            if (error) {
-              return reject(error);
-            }
-            resolve(
-              data.map(
-                (x: string) => Tabletojson.convert(`<table>${x}</table>`)[0]
-              )[0]
-            );
-          });
-        })
-        .catch((err) => {
-          return reject(err);
-        });
+      })
+      .catch((err) => {
+        return reject(err);
+      });
   });
 }
 
