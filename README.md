@@ -17,7 +17,7 @@ yarn add getjsontable
 ```
 
 ## Code example
-
+#### If you're using ES modules
 ```javascript
 import table from "getjsontable";
 table("https://sa-mp.ru/adminhistory-aurum", "post", undefined, {
