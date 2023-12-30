@@ -3,7 +3,6 @@ import { XRayError } from './XRayError';
 
 export class TableToJSONError extends Error {
   name = 'TableToJSONError';
-  message = '';
   isTableToJSONError = true;
   private error: unknown;
 

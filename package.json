@@ -1,6 +1,6 @@
 {
   "name": "getjsontable",
-  "version": "1.2.2",
+  "version": "1.2.3",
   "description": "JS library which helps to get some site table converted to json",
   "main": "build/main/index.js",
   "typings": "build/main/index.d.ts",

@@ -21,7 +21,7 @@ async function table(
   url: string,
   method: AxiosRequestConfig<any>['method'],
   axiosOptions?: AxiosRequestConfig<any>,
-  options?: IOptions
+  options?: IOptions,
 ): Promise<Array<Record<string, string>>> {
   return new Promise((resolve, reject) => {
     axios({ url, method, ...axiosOptions })
@@ -32,13 +32,8 @@ async function table(
           }
 
           const result = data.map(
-            (x: string) => tabletojson.convert(`<table>${x}</table>`)[0]
+            (x: string) => tabletojson.convert(`<table>${x}</table>`)[0],
           )[0];
-
-          if (!Array.isArray(result))
-            return reject(
-              new TableToJSONError(`Invalid table: table data must be an array`)
-            );
 
           resolve(formattedData(result, options));
         });
